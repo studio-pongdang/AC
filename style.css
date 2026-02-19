@@ -1,0 +1,698 @@
+:root {
+    --bg-pure-black: #000000;
+    --text-white: #ffffff;
+    --text-dim: #999999;
+    /* 가독성을 위해 조금 더 밝게 조정 */
+    --text-dark: #444444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-pure-black);
+    color: var(--text-white);
+    overflow-x: hidden;
+    scrollbar-width: none;
+    cursor: none;
+    /* 🌟 기본 커서 숨기기 */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* a, button 태그 위에서도 기본 커서 숨기기 */
+a,
+button,
+input[type="range"] {
+    cursor: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.sans {
+    font-family: 'Pretendard', sans-serif;
+}
+
+.serif {
+    font-family: 'Noto Serif KR', serif;
+}
+
+/* 씬(Scene) 공통 설정 */
+.scene {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10vw;
+}
+
+/* 레이아웃 정렬 */
+.content-center {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-left {
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+}
+
+/* 캐릭터 섹션 레이아웃 (이미지 + 텍스트) */
+.character-scene {
+    align-items: center;
+    /* 중앙 정렬 유지 */
+    gap: 80px;
+    /* 좌우 간격 살짝 넓힘 */
+}
+
+/* 이미지와 하단 정보를 묶는 왼쪽 컨테이너 추가 */
+.char-profile-col {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* 이미지와 텍스트 사이 간격 */
+    max-width: 420px;
+    /* 이미지 너비 제한 (크기 축소) */
+}
+
+.char-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 컨테이너가 정사각형이 되었으므로 cover를 써도 잘리지 않고 꽉 찹니다 */
+    transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.char-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* 🌟 추가: 가로세로 비율을 1:1 정사각형으로 고정 */
+    overflow: hidden;
+    border-radius: 2px;
+    filter: grayscale(100%) contrast(1.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* 이미지가 뜨는 느낌을 주기 위한 그림자 추가 (선택사항) */
+}
+
+/* 타이포그래피 스타일링 */
+.quote {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-bottom: 60px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+.title {
+    font-size: 9vw;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 2.2vw;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    display: block;
+}
+
+.story-title {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+    color: var(--text-white);
+    margin-bottom: 50px;
+}
+
+.story-body p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.story-body .emphasis {
+    color: var(--text-white);
+    font-weight: 400;
+    margin-top: 24px;
+}
+
+.story-body .highlight {
+    color: var(--text-white);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+}
+
+.time-stamp {
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+}
+
+/* 하단 스크롤 인디케이터 */
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.scroll-down p {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.scroll-down .line {
+    width: 1px;
+    height: 60px;
+    background-color: var(--text-white);
+    animation: scrollAnim 2s ease-in-out infinite;
+    transform-origin: top;
+}
+
+@keyframes scrollAnim {
+    0% {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleY(0);
+        opacity: 0;
+        transform-origin: bottom;
+    }
+}
+
+/* CTA 버튼 (트렌디 하이엔드 모션 - 수정) */
+.btn-wrapper {
+    margin-top: 60px;
+}
+
+.cta-btn {
+    position: relative;
+    display: inline-block;
+    padding: 22px 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    color: var(--text-white);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.cta-btn .btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-btn .btn-hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--text-white);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 1;
+}
+
+.cta-btn:hover {
+    color: var(--bg-pure-black);
+    border-color: var(--text-white);
+}
+
+.cta-btn:hover .btn-hover-effect {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* 반응형 처리 */
+@media (max-width: 1024px) {
+    .scene {
+        padding: 0 5vw;
+    }
+
+    .character-scene {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .char-text-wrapper {
+        text-align: left;
+    }
+
+    .char-image-wrapper {
+        max-width: 100%;
+        height: 50vh;
+    }
+
+    .story-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* 🌟 새로운 커스텀 커서 디자인 (서늘한 다이아몬드) */
+.cursor-core {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    /* 코어는 작은 점 */
+    pointer-events: none;
+    z-index: 10000;
+    transition: opacity 0.3s;
+}
+
+.cursor-diamond {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    /* 45도 기울여서 다이아몬드(마름모) 모양으로 만듦 */
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
+}
+
+/* 버튼이나 링크 위에 올렸을 때의 호버 액션 */
+.hover-active .cursor-core {
+    opacity: 0;
+    /* 코어는 숨김 */
+}
+
+.hover-active .cursor-diamond {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+    backdrop-filter: blur(2px);
+    /* 얼음결 같은 미세한 블러 효과 */
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* 🌟 인트로 스크린 */
+.intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.intro-content p {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+#enterBtn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    transition: color 0.3s ease;
+}
+
+#enterBtn:hover {
+    color: var(--text-dim);
+}
+
+/* 🌟 BGM 플레이어 UI */
+.bgm-player {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    z-index: 8000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    opacity: 0;
+    /* 처음에 숨겨둠 (JS로 등장) */
+    pointer-events: none;
+}
+
+.bgm-info {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.bgm-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#playPauseBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+}
+
+#volumeSlider {
+    width: 60px;
+    height: 2px;
+    -webkit-appearance: none;
+    background: #444;
+    outline: none;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/* 캐릭터 하단 상세 정보 리스트 */
+.char-details {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 20px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.info-label {
+    color: var(--text-dark);
+    /* 어두운 회색 */
+    font-weight: 600;
+    width: 25%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.info-value {
+    color: var(--text-dim);
+    font-weight: 300;
+    width: 75%;
+    text-align: right;
+    word-break: keep-all;
+}
+
+/* 🌟 스포일러(소원) 블러 처리 및 호버 이펙트 */
+.secret-row {
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.secret-label {
+    color: #fff;
+    /* 소원 라벨은 눈에 띄게 하얀색으로 */
+}
+
+.blur-reveal {
+    color: #fff;
+    filter: blur(6px);
+    /* 텍스트 뭉개기 */
+    opacity: 0.6;
+    transition: filter 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
+    cursor: help;
+    /* 마우스를 올리면 물음표 커서나 상호작용 가능한 느낌을 줌 */
+}
+
+/* 마우스를 올렸을 때 서서히 텍스트가 선명해짐 */
+.blur-reveal:hover {
+    filter: blur(0);
+    opacity: 1;
+}
+
+/* 🌟 1. 드래그 시 캔버스 질감 (시멘트색 하이라이트) */
+::selection {
+    background-color: #4a4a4a;
+    /* 차가운 시멘트색 */
+    color: #ffffff;
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background-color: #4a4a4a;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+/* 🌟 2. 히터 아지랑이 (Heat Distortion) 효과 */
+/* Scene 4의 낡은 전기난로 주변 텍스트에 일렁임 부여 */
+.heat-haze-text {
+    display: inline-block;
+    animation: heatHazeAnim 4s infinite alternate ease-in-out;
+}
+
+@keyframes heatHazeAnim {
+    0% {
+        filter: blur(0px);
+        transform: translateY(0);
+    }
+
+    50% {
+        filter: blur(1px);
+        transform: translateY(-1px);
+    }
+
+    100% {
+        filter: blur(0px);
+        transform: translateY(0);
+    }
+}
+
+/* 🌟 3. 'BLUE' 이스터에그용 플래시 이펙트 */
+.blue-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* 청아고등학교 상징색인 비비드 블루가 중앙에서 퍼지는 형태 */
+    background: radial-gradient(circle at center, rgba(0, 85, 255, 0.4) 0%, rgba(0, 0, 0, 0) 80%);
+    mix-blend-mode: screen;
+    /* 기존 흑백 화면과 부드럽게 섞임 */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 8500;
+    /* 사라질 때는 1.5초에 걸쳐 아스라히 스러짐 */
+    transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.blue-flash.active {
+    opacity: 1;
+    /* 나타날 때는 0.1초 만에 물감이 번지듯 팟! 하고 등장 */
+    transition: opacity 0.1s ease-out;
+}
+
+/* 🌟 Scene 4 하단 고정 푸터 스타일 */
+.footer-bottom {
+    position: absolute;
+    bottom: 5vh;
+    /* 화면 맨 아래에서 살짝 위로 띄움 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* 텍스트 줄 간격 */
+    z-index: 10;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    opacity: 0.6;
+}
+
+.easter-egg-hint {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+}
+
+/* SKY, BLUE 강조색 */
+.highlight-blue {
+    color: #4d8eff;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(77, 142, 255, 0.4);
+}
+
+/* 🌟 1. 어둠 속에 숨겨진 독백 (Invisible Ink) */
+.invisible-ink {
+    color: #000000 !important;
+    /* 🌟 여기를 수정: 어떤 텍스트 설정보다 무조건 검은색이 되도록 강제 적용 */
+    margin-top: 40px;
+    font-size: 0.95rem;
+    font-style: italic;
+    user-select: text;
+    cursor: text;
+}
+
+/* 기존에 설정해둔 ::selection 의 시멘트색 배경 때문에 드래그 시 하얗게 드러납니다! */
+
+/* 🌟 2. 프로필 이미지 3D 틸트용 원근감 설정 */
+.char-image-wrapper {
+    perspective: 1000px;
+    /* 3D 공간감 부여 */
+    transform-style: preserve-3d;
+}
+
+/* 🌟 3. 꺼져가는 전기난로의 미열 (Flickering Glow) */
+.heater-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 150px;
+    background: radial-gradient(ellipse, rgba(200, 60, 10, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    /* 클릭 방해 금지 */
+    z-index: -1;
+    /* 버튼 뒤로 보내기 */
+    mix-blend-mode: screen;
+    animation: flickerGlow 4s infinite alternate ease-in-out;
+}
+
+@keyframes flickerGlow {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    30% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* 🌟 5. 'CRACK' 유리 균열 트랜지션 모션 */
+.crack-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 20000;
+    pointer-events: none;
+    display: none;
+    /* 평소엔 숨김 */
+}
+
+.crack-overlay svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    /* 깨진 틈으로 빛이 새어나오는 효과 */
+}
+
+.crack-line {
+    fill: none;
+    stroke: #ffffff;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    /* 처음에 선을 숨김 */
+}
+
+.main-crack {
+    stroke-width: 0.8;
+}
+
+.sub-crack {
+    stroke-width: 0.3;
+}
+
+.crack-active .crack-line {
+    animation: drawCrack 0.1s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    /* 0.1초만에 쩍! 갈라짐 */
+}
+
+@keyframes drawCrack {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

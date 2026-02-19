@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무채색 | Colorless Canvas</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+
+    <div class="cursor-core"></div>
+    <div class="cursor-diamond"></div>
+
+    <div class="bgm-player">
+        <audio id="bgmAudio" src="Everything_to_you.mp3" loop></audio>
+        <audio id="ambientAudio" src="asmr_wind.mp3" loop></audio>
+
+        <div id="blueFlashOverlay" class="blue-flash"></div>
+        <div class="bgm-info">
+            <span class="bgm-title sans">김마리 - 나의 세상을 보여주고 싶어</span>
+        </div>
+        <div class="bgm-controls">
+            <button id="playPauseBtn" class="sans">PAUSE</button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.2">
+        </div>
+    </div>
+
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-content">
+            <p class="serif fade-in-intro">색이 없는 세계 속, 색을 다루는 아이. 한설.</p>
+            <button id="enterBtn" class="sans fade-in-intro delay-1">[ 제2미술실 입장하기 ]</button>
+        </div>
+    </div>
+
+    <section class="scene" id="scene1">
+        <div class="content-center">
+            <p class="serif quote fade-up">"단 한 번이라도 좋으니, 저 하늘의 색을 온전히 눈에 담고 싶었어."</p>
+            <h1 class="sans title fade-up delay-1">무채색</h1>
+            <p class="sans subtitle fade-up delay-2">Colorless Canvas</p>
+        </div>
+        <div class="scroll-down">
+            <p class="sans">SCROLL</p>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <section class="scene" id="scene2">
+        <div class="content-left">
+            <p class="sans label fade-in">LOCATION : 청아고등학교 구관</p>
+            <h2 class="serif story-title fade-in delay-1">시간이 멈춘 유리정원,<br>가장 깊은 곳의 외딴섬.</h2>
+            <div class="story-body fade-in delay-2">
+                <p class="serif">2026년 2월, 서울. 모든 것이 푸르게 빛나는 청아고등학교의 신관을 뒤로하고,</p>
+                <p class="serif">긴 구름다리를 건너면 색이 바랜 붉은 벽돌의 구관이 나타납니다.</p>
+                <br>
+                <p class="serif">운동장의 함성도, 수업 종소리도 물속처럼 먹먹하게 잠기는 곳.</p>
+                <p class="serif">오직 창틀을 흔드는 칼바람 소리와 낡은 난로의 미약한 열기만이 감도는 공간.</p>
+                <p class="serif">차갑게 가라앉은 테레빈유 냄새가 폐부 깊숙이 스며드는 이곳은,</p>
+                <p class="serif emphasis">청아고등학교 구관 3층, 제2 미술실입니다.</p>
+
+                <p class="serif invisible-ink">
+                    (아무도 오지 않았으면 좋겠어... 아니, 사실은 누군가 이 문을 열어주길 바랐던 걸까.)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene character-scene" id="scene3">
+        <div class="char-profile-col fade-in">
+            <div class="char-image-wrapper">
+                <img src="images/02.png" alt="한설 프로필 이미지" class="char-image">
+            </div>
+
+            <div class="char-details sans">
+                <div class="detail-row">
+                    <span class="info-label">이름</span>
+                    <span class="info-value">한설 (Han Seol)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="info-label">나이/성별</span>
+                    <span class="info-value">18세 / 여성</span>
+                </div>
+                <div class="detail-row">
+                    <span class="info-label">소속</span>
+                    <span class="info-value">청아고등학교 2학년, 유일한 미술부원</span>
+                </div>
+                <div class="detail-row">
+                    <span class="info-label">외모</span>
+                    <span class="info-value">단정한 순백색 보브컷, 투명하고 창백한 피부</span>
+                </div>
+                <div class="detail-row">
+                    <span class="info-label">성격</span>
+                    <span class="info-value">INFJ, 9w1, sp/so, 배려심 깊은 소심함</span>
+                </div>
+                <div class="detail-row secret-row">
+                    <span class="info-label secret-label">소원</span>
+                    <span class="info-value blur-reveal">단 한 번만이라도 온전한 하늘의 색을 느껴보고 싶음</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-right char-text-wrapper">
+            <p class="sans label fade-in">CHARACTER : 한설</p>
+            <h2 class="serif story-title fade-in delay-1">
+                "혹시... 기름 냄새 때문에,<br>
+                오신 건가요?"
+            </h2>
+            <div class="story-body fade-in delay-2">
+                <p class="serif">건드리면 깨질 듯 투명하고 창백한, 물 빠진 수채화 같은 고요함.</p>
+                <p class="serif">늘 타인에게 폐를 끼칠까 봐 경계하며 스스로 고립을 택하지만,</p>
+                <p class="serif">사실은 누구보다 사람의 온기를 그리워하는 소녀입니다.</p>
+                <br>
+                <p class="serif emphasis">그녀는 선천적 전색맹(Achromatopsia)을 앓고 있습니다.</p>
+                <p class="serif">그녀의 눈에 비친 학교의 푸른 풍경은 죽은 생선 같은 탁한 회색일 뿐.</p>
+                <p class="serif">튜브에 적힌 글씨만으로 색을 상상하며 붓을 들고,</p>
+                <p class="serif">자신의 그림이 남들과 다르다는 것을 알기에 보여주기를 부끄러워합니다.</p>
+                <p class="serif">지금 그녀의 캔버스에는 '겨울의 맑은 하늘'이 그려지고 있지만,</p>
+                <p class="serif">그곳엔 온통 <span class="highlight">어둡고 진한 시멘트색</span>만이 가득 차 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scene" id="scene4">
+        <div class="content-center">
+            <p class="sans time-stamp fade-up">2026. 02. 19 (목) 16:20</p>
+            <h2 class="serif story-title fade-up delay-1">차가운 기름 냄새와 흑백의 세상 속에서,<br>당신은 조심스럽게 문을 열었습니다.</h2>
+            <div class="heater-glow"></div>
+            <a href="https://crack.wrtn.ai/detail/699655fa9fdbdf64b47e0039" class="sans cta-btn" id="doorBtn">
+                <span class="btn-text heat-haze-text">제2미술실 안으로 들어가기</span>
+                <span class="btn-hover-effect"></span>
+            </a>
+        </div>
+        </div>
+
+        <div class="footer-bottom fade-up delay-3">
+            <p class="serif copyright">© 2026 FOXY. All rights reserved.</p>
+            <p class="sans easter-egg-hint">
+                키보드로 <span class="highlight-blue">SKY</span> 또는 <span class="highlight-blue">BLUE</span>를 순서대로 입력해보세요!
+            </p>
+        </div>
+    </section>
+
+    <div id="crackOverlay" class="crack-overlay">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M50,0 L47,15 L53,25 L45,40 L55,55 L42,70 L52,85 L48,100" class="crack-line main-crack" />
+            <path d="M45,40 L25,48 L15,45" class="crack-line sub-crack" />
+            <path d="M55,55 L75,60 L85,75" class="crack-line sub-crack" />
+            <path d="M53,25 L70,20 L80,10" class="crack-line sub-crack" />
+        </svg>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
